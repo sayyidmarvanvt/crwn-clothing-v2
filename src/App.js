@@ -32,7 +32,6 @@ const App = () => {
 
   return (
    <>
-
     <Diectory  categories={categories}/>
    </>
   );
