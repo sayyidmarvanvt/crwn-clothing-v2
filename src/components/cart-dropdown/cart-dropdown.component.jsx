@@ -10,7 +10,7 @@ const CartDropdown = () => {
     <div className="cart-dropdown-container">
       <div className="cart-items">
         {cartItems.map((cart) => (
-          <CartItem key={cart.id} cartItems={cart} />
+          <CartItem key={cart.id} cartItem={cart} />
         ))}
       </div>
       <Button>GO TO CHECKOUT</Button>
