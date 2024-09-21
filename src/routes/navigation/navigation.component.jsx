@@ -39,9 +39,7 @@ const Navigation = () => {
               {isSignInPage ? "SIGN UP" : "SIGN IN"}
             </Link>
           )}
-          <Link className="nav-link" to="/shop">
-            <CartIcon />
-          </Link>
+          <CartIcon />
         </div>
         {isCartOpen && <CartDropdown />}
       </div>
