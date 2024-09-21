@@ -4,6 +4,7 @@ import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
 import SignUpForm from "./routes/sign-up-form/sign-up-form.component";
 import SignInForm from "./routes/sign-in-form/sign-in-form.component";
+import Shop from "./routes/shop/shop.component";
 
 const App = () => {
   return (
@@ -11,8 +12,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
-          <Route path="/sign-up" element={<SignUpForm />} />
-          <Route path="/sign-in" element={<SignInForm />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="sign-up" element={<SignUpForm />} />
+          <Route path="sign-in" element={<SignInForm />} />
         </Route>
       </Routes>
     </>
