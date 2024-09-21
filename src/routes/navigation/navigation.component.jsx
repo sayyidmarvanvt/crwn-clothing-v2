@@ -12,6 +12,7 @@ const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const location = useLocation();
   const isSignInPage = location.pathname === "/sign-in";
+  const isCheckoutPage = location.pathname === "/checkout";
   const signOutHandler = async () => {
     await signOutUser();
   };
@@ -41,7 +42,7 @@ const Navigation = () => {
           )}
           <CartIcon />
         </div>
-        {isCartOpen && <CartDropdown />}
+        {isCartOpen && !isCheckoutPage && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
