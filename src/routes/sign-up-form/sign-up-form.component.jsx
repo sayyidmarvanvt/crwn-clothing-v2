@@ -5,9 +5,18 @@ import {
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../../components/form-input/form-input.component";
-import "./sign-up-form.styles.scss";
-import Button from "../../components/button/button.component";
-import { Link, useNavigate } from "react-router-dom";
+import "./sign-up-form.styles.jsx";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../components/button/button.component";
+import { useNavigate } from "react-router-dom";
+import {
+  AuthenticationContainer,
+  SignUpContainer,
+  ButtonsContainer,
+  ToggleContainer,
+  ToggleLink,
+} from "./sign-up-form.styles";
 
 const defaultFormFields = {
   displayName: "",
@@ -48,7 +57,6 @@ const SignUpForm = () => {
     }
   };
 
-  
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
     navigate("/");
@@ -60,8 +68,8 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="authentication-container">
-      <div className="sign-up-container">
+    <AuthenticationContainer>
+      <SignUpContainer>
         <h2>Don't have an account</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={handleSubmit}>
@@ -73,7 +81,6 @@ const SignUpForm = () => {
             name="displayName"
             value={displayName}
           />
-
           <FormInput
             label="Email"
             type="email"
@@ -90,7 +97,6 @@ const SignUpForm = () => {
             name="password"
             value={password}
           />
-
           <FormInput
             label="Confirm Password"
             type="password"
@@ -99,25 +105,23 @@ const SignUpForm = () => {
             name="confirmPassword"
             value={confirmPassword}
           />
-          <div className="buttons-container">
+          <ButtonsContainer>
             <Button type="submit">Sign Up</Button>
             <Button
               type="button"
               onClick={signInWithGoogle}
-              buttonType="google"
+              buttonType={BUTTON_TYPE_CLASSES.google}
             >
-              Sign IN With Google
+              Sign In With Google
             </Button>
-          </div>
+          </ButtonsContainer>
         </form>
-        <div className="toggle-container">
+        <ToggleContainer>
           <p>Have an account?</p>
-          <Link className="toggle-link" to="/sign-in">
-            Sign in
-          </Link>
-        </div>
-      </div>
-    </div>
+          <ToggleLink to="/sign-in">Sign in</ToggleLink>
+        </ToggleContainer>
+      </SignUpContainer>
+    </AuthenticationContainer>
   );
 };
 

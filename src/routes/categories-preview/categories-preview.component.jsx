@@ -1,7 +1,6 @@
-import {  useContext } from "react";
+import { useContext } from "react";
 
 import { CategoriesContext } from "../../context/categories.context";
-
 
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 
@@ -9,18 +8,15 @@ const CategoryPreviews = () => {
   const { categories } = useContext(CategoriesContext);
 
   return (
-    <div className="category-preview-container">
+    <>
       {Object.entries(categories).map(([title, items]) => {
-        return (
-        <CategoryPreview  key={title} title={title} products={items}/>
-        );
+        return <CategoryPreview key={title} title={title} products={items} />;
       })}
-    </div>
+    </>
   );
 };
 
 export default CategoryPreviews;
-
 
 // {Object.keys(categories).map((title) => {
 //   return (
