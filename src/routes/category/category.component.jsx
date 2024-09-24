@@ -13,6 +13,11 @@ const Category = () => {
     setProducts(categories[category]);
   }, [category, categories]);
 
+  const matchedCategory = categories[category];
+  if (!matchedCategory) {
+    return <h2>Category Not Found</h2>;
+  }
+
   return (
     <>
       <Title>{category.toUpperCase()}</Title>

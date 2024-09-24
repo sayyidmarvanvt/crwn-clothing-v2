@@ -6,6 +6,7 @@ import SignUpForm from "./routes/sign-up-form/sign-up-form.component";
 import SignInForm from "./routes/sign-in-form/sign-in-form.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
+import NotFound from "./routes/not-found/not-found.component";
 
 const App = () => {
   return (
@@ -16,8 +17,9 @@ const App = () => {
           <Route path="shop/*" element={<Shop />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="sign-up" element={<SignUpForm />} />
-          <Route path="sign-in" element={<SignInForm />} />
+          <Route path="sign-in" element={<SignInForm />} /> 
         </Route>
+          <Route path="*" element={<NotFound />} /> 
       </Routes>
     </>
   );
