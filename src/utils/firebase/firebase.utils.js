@@ -100,13 +100,14 @@ export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef); // Define the query
   const querySnapshot = await getDocs(q); // Execute the query
+  return querySnapshot.docs.map((docSnapShot) => docSnapShot.data());
 
-  // Reduce the query result to a categories object
-  return querySnapshot.docs.reduce((acc, docSnapShot) => {
-    const { title, items } = docSnapShot.data();
-    acc[title.toLowerCase()] = items; // Add category items to accumulator
-    return acc;
-  }, {});
+  // // Reduce the query result to a categories object
+  // return querySnapshot.docs.reduce((acc, docSnapShot) => {
+  //   const { title, items } = docSnapShot.data();
+  //   acc[title.toLowerCase()] = items; // Add category items to accumulator
+  //   return acc;
+  // }, {});
 };
 
 /**
