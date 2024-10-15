@@ -1,25 +1,73 @@
-import { CART_ACTION_TYPES } from "./cart.types";
+import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
   isCartOpen: false,
-  cartCount: 0,
-  cartTotal: 0,
   cartItems: [],
 };
 
-export const cartReducer = (state = INITIAL_STATE, action = {}) => {
-  const { type, payload } = action;
-  switch (type) {
-    case CART_ACTION_TYPES.SET_CART_OPEN:
-      return { ...state, isCartOpen: payload };
-    case CART_ACTION_TYPES.SET_CART_ITEMS:
-      return { ...state, cartItems: payload };
-    case CART_ACTION_TYPES.SET_CART_COUNT:
-      return { ...state, cartCount: payload };
-    case CART_ACTION_TYPES.SET_CART_TOTAL:
-      return { ...state, cartTotal: payload };
+export const cartSlice = createSlice({
+  name: "cart",
+  initialState: INITIAL_STATE,
+  reducers: {
+    addItemToCart(state, action) {
+      state.cartItems = addCartItem(state.cartItems, action.payload);
+    },
+    removeItemFromCart(state, action) {
+      state.cartItems = removeCartItem(state.cartItems, action.payload);
+    },
+    clearItemFromCart(state, action) {
+      state.cartItems = clearCartItem(state.cartItems, action.payload);
+    },
 
-    default:
-      return state;
+    setIsCartOpen(state, action) {
+      state.isCartOpen = action.payload;
+    },
+    setCartItems(state, action) {
+      state.cartItems = action.payload;
+    },
+  },
+});
+
+export const {
+  addItemToCart,
+  removeItemFromCart,
+  clearItemFromCart,
+  setIsCartOpen,
+} = cartSlice.actions;
+
+export const cartReducer = cartSlice.reducer;
+
+// Helper functions for cart item operations
+const findExistingCartItem = (cartItems, product) =>
+  cartItems.find((cartItem) => cartItem.id === product.id);
+
+const addCartItem = (cartItems, product) => {
+  const existingCartItem = findExistingCartItem(cartItems, product);
+
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.id === product.id
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem
+    );
   }
+
+  return [...cartItems, { ...product, quantity: 1 }];
 };
+
+const removeCartItem = (cartItems, product) => {
+  const existingCartItem = findExistingCartItem(cartItems, product);
+
+  if (existingCartItem && existingCartItem.quantity === 1) {
+    return clearCartItem(cartItems, product);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === product.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
+
+const clearCartItem = (cartItems, product) =>
+  cartItems.filter((cartItem) => cartItem.id !== product.id);

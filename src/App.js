@@ -12,23 +12,28 @@ import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase.utils";
-import { setCurrentUser } from "./store/user/user.action";
+import { setCurrentUser } from "./store/user/user.reducer";
 
 const App = () => {
- 
   const dispatch = useDispatch();
   useEffect(() => {
-   
     const unsubscribe = onAuthStateChangedListener(async (user) => {
+      let simplifiedUser = null;
       if (user) {
         await createUserDocumentFromAuth(user);
+        simplifiedUser = {
+          email: user.email,
+          accessToken: user.accessToken,
+        };
       }
-        dispatch(setCurrentUser(user));
+      dispatch(setCurrentUser(simplifiedUser));
     });
+
     return () => {
       unsubscribe();
     };
   }, [dispatch]);
+
   return (
     <>
       <Routes>
