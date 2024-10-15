@@ -25,8 +25,6 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
       userAuth,
       additionalDetails
     );
-    console.log(userSnapshot);
-
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailed(error));
@@ -70,8 +68,6 @@ export function* signInWithEmail({ payload: { email, password } }) {
 
 // Saga to handle user sign up
 export function* signUp({ payload: { email, password, displayName } }) {
-  console.log(email, password, displayName);
-
   try {
     const { user } = yield call(
       createAuthUserWithEmailAndPassword,
@@ -95,8 +91,6 @@ export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
 
 // Saga to handle sign out
 export function* signOut() {
-  console.log("hi");
-
   try {
     yield call(signOutUser);
     yield put(signOutSuccess());

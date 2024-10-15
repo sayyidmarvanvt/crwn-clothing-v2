@@ -74,9 +74,9 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 // Sign out the current user
 export const signOutUser = async () => await signOut(auth);
 
-// Listener to track authentication state changes
-export const onAuthStateChangedListener = (callback) =>
-  onAuthStateChanged(auth, callback);
+// // Listener to track authentication state changes
+// export const onAuthStateChangedListener = (callback) =>
+//   onAuthStateChanged(auth, callback);
 
 export const getCurrentUser=()=>{
   return new Promise((resolve,reject)=>{
