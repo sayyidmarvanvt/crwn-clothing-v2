@@ -8,26 +8,12 @@ import SignInForm from "./routes/sign-in-form/sign-in-form.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 import NotFound from "./routes/not-found/not-found.component";
-import {
-  createUserDocumentFromAuth,
-  onAuthStateChangedListener,
-} from "./utils/firebase/firebase.utils";
-import { setCurrentUser } from "./store/user/user.action";
+import { checkUserSession } from "./store/user/user.action";
 
 const App = () => {
- 
   const dispatch = useDispatch();
   useEffect(() => {
-   
-    const unsubscribe = onAuthStateChangedListener(async (user) => {
-      if (user) {
-        await createUserDocumentFromAuth(user);
-      }
-        dispatch(setCurrentUser(user));
-    });
-    return () => {
-      unsubscribe();
-    };
+    dispatch(checkUserSession());
   }, [dispatch]);
   return (
     <>

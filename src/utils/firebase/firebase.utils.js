@@ -56,7 +56,7 @@ export const createUserDocumentFromAuth = async (userAuth, additional = {}) => {
     }
   }
 
-  return userDocRef;
+  return userSnapshot;
 };
 
 // Create a new user with email and password
@@ -77,6 +77,15 @@ export const signOutUser = async () => await signOut(auth);
 // Listener to track authentication state changes
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser=()=>{
+  return new Promise((resolve,reject)=>{
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    },reject)
+  })
+}
 
 // Add a batch of documents to a collection in Firestore
 export const addCollectionAndDocuments = async (
