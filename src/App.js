@@ -21,9 +21,13 @@ const App = () => {
       let simplifiedUser = null;
       if (user) {
         await createUserDocumentFromAuth(user);
+      
+        
         simplifiedUser = {
+          displayName:user.displayName,
           email: user.email,
           accessToken: user.accessToken,
+          
         };
       }
       dispatch(setCurrentUser(simplifiedUser));

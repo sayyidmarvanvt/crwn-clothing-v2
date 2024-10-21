@@ -36,10 +36,9 @@ const PaymentForm = () => {
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
-
         billing_details: {
           name: currentUser ? currentUser.displayName : "Guest",
-          email: currentUser ? currentUser.displayName : "guest@example.com",
+          email: currentUser ? currentUser.email : "guest@example.com",
           phone: "+1234567890",
           address: {
             line1: "1234 Elm St", // Dummy street address

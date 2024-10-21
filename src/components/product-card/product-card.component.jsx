@@ -6,15 +6,11 @@ import {
   Name,
   Price,
 } from "./product-card.styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/cart/cart.reducer.js";
-import { selectCartItems } from "../../store/cart/cart.selector.js";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const cartItems = useSelector(selectCartItems);
-  console.log(cartItems);
-  
   const dispatch = useDispatch();
   const addProductToCart = () => dispatch(addItemToCart(product));
   return (
