@@ -19,9 +19,8 @@ const Shop = () => {
         dispatch(setCategories(categoriesArray));
       } catch (error) {
         console.error("Failed to fetch categories:", error);
-      } finally {
-        dispatch(setLoading(false));
       }
+      dispatch(setLoading(false));
     };
     fetchCategories();
   }, [dispatch]);
