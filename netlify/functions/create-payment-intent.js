@@ -9,6 +9,7 @@ exports.handler = async (event) => {
       amount,
       currency: "usd",
       payment_method_types: ["card"],
+      description: "Export Transaction for Product XYZ",
     });
 
     return {

@@ -47,8 +47,6 @@ const PaymentForm = () => {
     } = response;
 
     const cardDetails = elements.getElement(CardElement);
-    console.log(cardDetails);
-    
 
     if (!ifValidCardElement(cardDetails)) return;
 
@@ -70,9 +68,6 @@ const PaymentForm = () => {
         },
       },
     });
-
-    console.log(paymentResult);
-    
 
     setIsProcessingPayment(false);
 
