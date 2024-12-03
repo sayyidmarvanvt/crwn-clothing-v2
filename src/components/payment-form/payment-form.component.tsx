@@ -55,6 +55,16 @@ const PaymentForm = () => {
         card: cardDetails,
         billing_details: {
           name: currentUser ? currentUser.displayName : "Guest",
+          email: currentUser ? currentUser.email : "guest@example.com",
+          phone: "+1234567890",
+          address: {
+            line1: "1234 Elm St", // Dummy street address
+            line2: "Apt 101", // Optional line 2
+            city: "Sample City", // Dummy city
+            state: "CA", // Dummy state
+            postal_code: "41323", // Dummy postal code
+            country: "US", // Dummy country
+          },
         },
       },
     });
