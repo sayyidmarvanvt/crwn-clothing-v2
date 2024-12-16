@@ -35,13 +35,11 @@ const Checkout = () => {
           <span>Remove</span>
         </HeaderBlock>
       </CheckoutHeader>
-      <div>
-        {cartItems.map((cartItem) => (
-          <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-        ))}
-      </div>
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
       <Total>Total: ${cartTotal}</Total>
-      <PaymentForm/>
+      <PaymentForm />
     </CheckoutContainer>
   );
 };
