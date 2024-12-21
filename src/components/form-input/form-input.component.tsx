@@ -3,13 +3,15 @@ import { FormInputLabel, Input, Group } from "./form-input.styles";
 
 type FormInputProps = {
   label: string;
+  id: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
+const FormInput: FC<FormInputProps> = ({ label, id, ...otherProps }) => {
   return (
     <Group>
-      <Input {...otherProps} />
+      <Input id={id} {...otherProps} />
       <FormInputLabel
+        htmlFor={id}
         $shrink={Boolean(
           otherProps.value &&
             otherProps.value === "string" &&

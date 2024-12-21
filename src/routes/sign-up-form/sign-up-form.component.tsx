@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { AuthError,AuthErrorCodes } from "firebase/auth";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import FormInput from "../../components/form-input/form-input.component";
 import "./sign-up-form.styles";
 import Button, {
@@ -14,10 +14,7 @@ import {
   ToggleLink,
 } from "./sign-up-form.styles";
 import { useDispatch } from "react-redux";
-import {
-  googleSignInStart,
-  signUpStart,
-} from "../../store/user/user.action";
+import { googleSignInStart, signUpStart } from "../../store/user/user.action";
 
 const defaultFormFields = {
   displayName: "",
@@ -35,7 +32,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event:FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("password do not match");
@@ -46,7 +43,7 @@ const SignUpForm = () => {
       resetFormFields();
       navigate("/sign-in");
     } catch (error) {
-      if (( error as AuthError).code  === AuthErrorCodes.EMAIL_EXISTS) {
+      if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         alert("Email already in use");
       } else {
         console.log("user creation error", error);
@@ -59,7 +56,7 @@ const SignUpForm = () => {
     navigate("/");
   };
 
-  const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -71,6 +68,7 @@ const SignUpForm = () => {
         <span>Sign up with your email and password</span>
         <form onSubmit={handleSubmit}>
           <FormInput
+            id="name"
             label="Display Name"
             type="text"
             required
@@ -79,6 +77,7 @@ const SignUpForm = () => {
             value={displayName}
           />
           <FormInput
+            id="email"
             label="Email"
             type="email"
             required
@@ -87,6 +86,7 @@ const SignUpForm = () => {
             value={email}
           />
           <FormInput
+            id="password"
             label="Password"
             type="password"
             required
@@ -95,6 +95,7 @@ const SignUpForm = () => {
             value={password}
           />
           <FormInput
+            id="confirmpassword"
             label="Confirm Password"
             type="password"
             required

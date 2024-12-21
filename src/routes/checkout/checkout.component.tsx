@@ -1,5 +1,5 @@
+import React, { Suspense } from "react";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import PaymentForm from "../../components/payment-form/payment-form.component";
 import {
   selectCartItems,
   selectCartTotal,
@@ -11,6 +11,13 @@ import {
   Total,
 } from "./checkout.styles";
 import { useSelector } from "react-redux";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "../../utils/stripe/stripe.utils";
+
+// Lazy load the PaymentForm component only when needed
+const PaymentForm = React.lazy(
+  () => import("../../components/payment-form/payment-form.component")
+);
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -39,7 +46,13 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <Total>Total: ${cartTotal}</Total>
-      <PaymentForm />
+
+      {/* Only load PaymentForm when needed */}
+      <Suspense fallback={<div>Loading Payment...</div>}>
+        <Elements stripe={stripePromise}>
+          <PaymentForm />
+        </Elements>
+      </Suspense>
     </CheckoutContainer>
   );
 };

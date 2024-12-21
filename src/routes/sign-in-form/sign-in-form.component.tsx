@@ -68,21 +68,26 @@ const SignInForm = () => {
         <span>Sign in with your email and password</span>
         <form onSubmit={handleSubmit}>
           <FormInput
+            id="signinemail"
             label="Email"
             type="email"
             required
             onChange={handleChange}
             name="email"
             value={email}
+  
           />
           <FormInput
+            id="signinpassword"
             label="Password"
             type="password"
             required
             onChange={handleChange}
             name="password"
             value={password}
+    
           />
+
           <ButtonsContainer>
             <Button type="submit">Sign IN</Button>
             <Button
