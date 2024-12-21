@@ -13,7 +13,6 @@ import {
   FormContainer,
   PaymentButton,
 } from "./payment-form.styles";
-import { log } from "console";
 
 const ifValidCardElement = (
   card: StripeCardElement | null
