@@ -13,6 +13,7 @@ import {
   FormContainer,
   PaymentButton,
 } from "./payment-form.styles";
+import { log } from "console";
 
 const ifValidCardElement = (
   card: StripeCardElement | null
@@ -94,17 +95,21 @@ const PaymentForm = () => {
 
   return (
     <PaymentFormContainer>
-      <FormContainer onSubmit={paymentHandler}>
-        <h2>Credit Card Payment: </h2>
-        <CardElement />
-        <PaymentButton
-          type="button"
-          isLoading={isProcessingPayment}
-          buttonType={BUTTON_TYPE_CLASSES.inverted}
-        >
-          Pay now
-        </PaymentButton>
-      </FormContainer>
+      {currentUser ? (
+        <FormContainer onSubmit={paymentHandler}>
+          <h2>Credit Card Payment: </h2>
+          <CardElement />
+          <PaymentButton
+            type="button"
+            isLoading={isProcessingPayment}
+            buttonType={BUTTON_TYPE_CLASSES.inverted}
+          >
+            Pay now
+          </PaymentButton>
+        </FormContainer>
+      ) : (
+        <h2>Please log in to proceed with the payment.</h2>
+      )}
     </PaymentFormContainer>
   );
 };
